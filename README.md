@@ -1,8 +1,14 @@
-# three-orbit-controls
+# three-transform-controls
 
-[![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges)
+ThreeJS TransformControls as an npm module. 
+See example with react-three-renderer.
 
-ThreeJS TransformControls as an npm module. See [test](#testing) for an example.
+## Install
+```
+npm install three-transform-controls
+```
+
+## Example
 
 ```js
 import React, { Component } from 'react';
@@ -107,30 +113,5 @@ export default class Example extends Component {
 
 ```
 
-## Usage
 
-[![NPM](https://nodei.co/npm/three-orbit-controls.png)](https://nodei.co/npm/three-orbit-controls/)
 
-#### `OrbitControls = require('three-orbit-controls')(THREE)`
-
-This module exports a function which accepts an instance of THREE, and returns an OrbitControls class. This allows you to use the module with CommonJS, globals, etc.
-
-The returned function has the following constructor pattern:
-
-```js
-var control = new TransformControls(this.refs.camera, ReactDOM.findDOMNode(this.refs.react3));
-
-control.attach( plane);)
-```
-
-#### Versioning
-
-This uses an unusual versioning system to better support ThreeJS's (lack of) versioning. The major version of this repo will line up with ThreeJS breaking releases (`69.0.0` => `r69`). Often the module will continue to work (i.e. `69.0.0` should work with r70).
-
-The minor will be reserved for any new features, and patch for bug fixes and documentation/readme updates. In some rare cases, a minor feature may introduce a breaking change; so it's generally safest to use tilde or `--save-exact` for this module.
-
-If you see any version issues, open a ticket!
-
-## testing
-
-Git clone, `npm install` and then run `npm start` to spin up a development server. Open `localhost:9966` in your browser to see the `test.js` file in action.

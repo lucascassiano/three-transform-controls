@@ -1,116 +1,32 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'version',
+1 verbose cli   '1.0.2' ]
 2 info using npm@4.0.5
 3 info using node@v6.9.2
-4 verbose publish [ '.' ]
-5 silly cache add args [ '.', null ]
-6 verbose cache add spec .
-7 silly cache add parsed spec Result {
-7 silly cache add   raw: '.',
-7 silly cache add   scope: null,
-7 silly cache add   escapedName: null,
-7 silly cache add   name: null,
-7 silly cache add   rawSpec: '.',
-7 silly cache add   spec: '/Users/lucascassiano/Documents/three-transform-controls',
-7 silly cache add   type: 'directory' }
-8 verbose addLocalDirectory /Users/lucascassiano/.npm/three-transform-controls/1.0.0/package.tgz not in flight; packing
-9 verbose correctMkdir /Users/lucascassiano/.npm correctMkdir not in flight; initializing
-10 info lifecycle three-transform-controls@1.0.0~prepublish: three-transform-controls@1.0.0
-11 silly lifecycle three-transform-controls@1.0.0~prepublish: no script for prepublish, continuing
-12 info lifecycle three-transform-controls@1.0.0~prepare: three-transform-controls@1.0.0
-13 silly lifecycle three-transform-controls@1.0.0~prepare: no script for prepare, continuing
-14 verbose tar pack [ '/Users/lucascassiano/.npm/three-transform-controls/1.0.0/package.tgz',
-14 verbose tar pack   '/Users/lucascassiano/Documents/three-transform-controls' ]
-15 verbose tarball /Users/lucascassiano/.npm/three-transform-controls/1.0.0/package.tgz
-16 verbose folder /Users/lucascassiano/Documents/three-transform-controls
-17 verbose addLocalTarball adding from inside cache /Users/lucascassiano/.npm/three-transform-controls/1.0.0/package.tgz
-18 verbose correctMkdir /Users/lucascassiano/.npm correctMkdir not in flight; initializing
-19 silly cache afterAdd three-transform-controls@1.0.0
-20 verbose afterAdd /Users/lucascassiano/.npm/three-transform-controls/1.0.0/package/package.json not in flight; writing
-21 verbose correctMkdir /Users/lucascassiano/.npm correctMkdir not in flight; initializing
-22 verbose afterAdd /Users/lucascassiano/.npm/three-transform-controls/1.0.0/package/package.json written
-23 silly publish { name: 'three-transform-controls',
-23 silly publish   version: '1.0.0',
-23 silly publish   description: 'Transform Controls as a NPM package',
-23 silly publish   main: 'index.js',
-23 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
-23 silly publish   repository:
-23 silly publish    { type: 'git',
-23 silly publish      url: 'git+https://github.com/lucascassiano/three-transform-controls.git' },
-23 silly publish   keywords:
-23 silly publish    [ 'Three',
-23 silly publish      'Transform',
-23 silly publish      'Controls',
-23 silly publish      'React',
-23 silly publish      'react-three-renderer' ],
-23 silly publish   author: { name: 'lucascassiano' },
-23 silly publish   license: 'MIT',
-23 silly publish   bugs: { url: 'https://github.com/lucascassiano/three-transform-controls/issues' },
-23 silly publish   homepage: 'https://github.com/lucascassiano/three-transform-controls#readme',
-23 silly publish   readme: '# three-orbit-controls\n\n[![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges)\n\nThreeJS TransformControls as an npm module. See [test](#testing) for an example.\n\n```js\nimport React, { Component } from \'react\';\nimport React3 from \'react-three-renderer\';\nimport * as THREE from \'three\';\nimport ReactDOM from \'react-dom\';\n\nvar TransformControls = require(\'../controls/TransformControls\')(THREE);\n\nexport default class Example extends Component {\n  constructor(props, context) {\n    super(props, context);\n\n    this.cameraPosition = new THREE.Vector3(0, 0, 5);\n\n    this.state = {\n      cubeRotation: new THREE.Euler(),\n    };\n\n    this._onAnimate = () => {\n      // we will get this callback every frame\n    };\n  }\n\n\n  componentDidMount() {\n\n    var material = new THREE.MeshBasicMaterial({\n      color: "#1300FF",\n      transparent: true,\n      depthWrite: false\n    });\n\n    var object = new THREE.Object3D();\n    var plane = new THREE.Mesh(new THREE.PlaneGeometry(25, 5), material);\n    var control = new TransformControls(this.refs.camera, ReactDOM.findDOMNode(this.refs.react3));\n    //control.addEventListener(\'change\', render);\n    control.attach( plane);\n    object.add(control);\n    object.add(plane);\n    \n\n    this.refs.group.add(object);\n  }\n\n\n  render() {\n    const width = window.innerWidth; // canvas width\n    const height = window.innerHeight; // canvas height\n\n    return (\n      <React3\n        mainCamera="camera" // this points to the perspectiveCamera which has the name set to "camera" below\n        width={width}\n        height={height}\n        ref="react3"\n        onAnimate={this._onAnimate}\n        antialias\n        alpha={false}\n      >\n        <module\n          ref="mouseInput"\n          descriptor={MouseInput}\n        />\n\n        <scene>\n          <perspectiveCamera\n            ref="camera"\n            name="camera"\n            fov={75}\n            aspect={width / height}\n            near={0.1}\n            far={1000}\n            position={this.cameraPosition}\n          />\n\n          <group ref=\'group\' />\n          <gridHelper\n            size={10}\n            colorGrid={"#040404"}\n          />\n\n          <mesh\n            rotation={this.state.cubeRotation}\n          >\n            <boxGeometry\n              width={1}\n              height={1}\n              depth={1}\n            />\n            <meshBasicMaterial\n              color={0x00ff00}\n            />\n          </mesh>\n\n\n        </scene>\n      </React3>\n    );\n  }\n}\n\n```\n\n## Usage\n\n[![NPM](https://nodei.co/npm/three-orbit-controls.png)](https://nodei.co/npm/three-orbit-controls/)\n\n#### `OrbitControls = require(\'three-orbit-controls\')(THREE)`\n\nThis module exports a function which accepts an instance of THREE, and returns an OrbitControls class. This allows you to use the module with CommonJS, globals, etc.\n\nThe returned function has the following constructor pattern:\n\n```js\nvar control = new TransformControls(this.refs.camera, ReactDOM.findDOMNode(this.refs.react3));\n\ncontrol.attach( plane);)\n```\n\n#### Versioning\n\nThis uses an unusual versioning system to better support ThreeJS\'s (lack of) versioning. The major version of this repo will line up with ThreeJS breaking releases (`69.0.0` => `r69`). Often the module will continue to work (i.e. `69.0.0` should work with r70).\n\nThe minor will be reserved for any new features, and patch for bug fixes and documentation/readme updates. In some rare cases, a minor feature may introduce a breaking change; so it\'s generally safest to use tilde or `--save-exact` for this module.\n\nIf you see any version issues, open a ticket!\n\n## testing\n\nGit clone, `npm install` and then run `npm start` to spin up a development server. Open `localhost:9966` in your browser to see the `test.js` file in action.\n',
-23 silly publish   readmeFilename: 'README.md',
-23 silly publish   gitHead: 'c407897e2b1086134ebeaef8a2d3719b60b62afe',
-23 silly publish   _id: 'three-transform-controls@1.0.0',
-23 silly publish   _shasum: '44b5179c62b5f652302470575d9565e3eb210d2d',
-23 silly publish   _from: '.' }
-24 info lifecycle three-transform-controls@1.0.0~prepublishOnly: three-transform-controls@1.0.0
-25 silly lifecycle three-transform-controls@1.0.0~prepublishOnly: no script for prepublishOnly, continuing
-26 verbose getPublishConfig undefined
-27 silly mapToRegistry name three-transform-controls
-28 silly mapToRegistry using default registry
-29 silly mapToRegistry registry http://registry.npmjs.org/
-30 silly mapToRegistry data Result {
-30 silly mapToRegistry   raw: 'three-transform-controls',
-30 silly mapToRegistry   scope: null,
-30 silly mapToRegistry   escapedName: 'three-transform-controls',
-30 silly mapToRegistry   name: 'three-transform-controls',
-30 silly mapToRegistry   rawSpec: '',
-30 silly mapToRegistry   spec: 'latest',
-30 silly mapToRegistry   type: 'tag' }
-31 silly mapToRegistry uri http://registry.npmjs.org/three-transform-controls
-32 verbose publish registryBase http://registry.npmjs.org/
-33 silly publish uploading /Users/lucascassiano/.npm/three-transform-controls/1.0.0/package.tgz
-34 verbose request uri http://registry.npmjs.org/three-transform-controls
-35 verbose request sending authorization for write operation
-36 info attempt registry request try #1 at 1:37:57 AM
-37 verbose request using bearer token for auth
-38 verbose request id 7a8c8ab904b68ba7
-39 http request PUT http://registry.npmjs.org/three-transform-controls
-40 http 403 http://registry.npmjs.org/three-transform-controls
-41 verbose headers { 'content-type': 'application/json',
-41 verbose headers   'cache-control': 'max-age=300',
-41 verbose headers   'content-length': '95',
-41 verbose headers   'accept-ranges': 'bytes',
-41 verbose headers   date: 'Sun, 09 Jul 2017 05:37:58 GMT',
-41 verbose headers   via: '1.1 varnish',
-41 verbose headers   connection: 'keep-alive',
-41 verbose headers   'x-served-by': 'cache-bos8233-BOS',
-41 verbose headers   'x-cache': 'MISS',
-41 verbose headers   'x-cache-hits': '0',
-41 verbose headers   'x-timer': 'S1499578678.946971,VS0,VE737',
-41 verbose headers   vary: 'Accept-Encoding, Accept' }
-42 verbose request invalidating /Users/lucascassiano/.npm/registry.npmjs.org/three-transform-controls on PUT
-43 error publish Failed PUT 403
-44 verbose stack Error: "You cannot publish over the previously published version 1.0.0." : three-transform-controls
-44 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:302:12)
-44 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:290:14)
-44 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:210:14)
-44 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:186:22)
-44 verbose stack     at emitTwo (events.js:106:13)
-44 verbose stack     at Request.emit (events.js:191:7)
-44 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1081:10)
-44 verbose stack     at emitOne (events.js:96:13)
-44 verbose stack     at Request.emit (events.js:188:7)
-44 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1001:12)
-45 verbose statusCode 403
-46 verbose pkgid three-transform-controls
-47 verbose cwd /Users/lucascassiano/Documents/three-transform-controls
-48 error Darwin 16.6.0
-49 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
-50 error node v6.9.2
-51 error npm  v4.0.5
-52 error code E403
-53 error "You cannot publish over the previously published version 1.0.0." : three-transform-controls
-54 error If you need help, you may report this error at:
-54 error     <https://github.com/npm/npm/issues>
-55 verbose exit [ 1, true ]
+4 info git [ 'status', '--porcelain' ]
+5 verbose stack Error: Git working directory not clean.
+5 verbose stack M README.md
+5 verbose stack M npm-debug.log
+5 verbose stack     at /usr/local/lib/node_modules/npm/lib/version.js:247:19
+5 verbose stack     at /usr/local/lib/node_modules/npm/lib/utils/no-progress-while-running.js:21:8
+5 verbose stack     at ChildProcess.exithandler (child_process.js:197:7)
+5 verbose stack     at emitTwo (events.js:106:13)
+5 verbose stack     at ChildProcess.emit (events.js:191:7)
+5 verbose stack     at maybeClose (internal/child_process.js:877:16)
+5 verbose stack     at Socket.<anonymous> (internal/child_process.js:334:11)
+5 verbose stack     at emitOne (events.js:96:13)
+5 verbose stack     at Socket.emit (events.js:188:7)
+5 verbose stack     at Pipe._handle.close [as _onclose] (net.js:498:12)
+6 verbose cwd /Users/lucascassiano/Documents/three-transform-controls
+7 error Darwin 16.6.0
+8 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "version" "1.0.2"
+9 error node v6.9.2
+10 error npm  v4.0.5
+11 error Git working directory not clean.
+11 error M README.md
+11 error M npm-debug.log
+12 error If you need help, you may report this error at:
+12 error     <https://github.com/npm/npm/issues>
+13 verbose exit [ 1, true ]
