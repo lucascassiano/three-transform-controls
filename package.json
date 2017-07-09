@@ -1,0 +1,26 @@
+{
+  "name": "three-transform-controls",
+  "version": "1.0.0",
+  "description": "Transform Controls as a NPM package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucascassiano/three-transform-controls.git"
+  },
+  "keywords": [
+    "Three",
+    "Transform",
+    "Controls",
+    "React",
+    "react-three-renderer"
+  ],
+  "author": "lucascassiano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucascassiano/three-transform-controls/issues"
+  },
+  "homepage": "https://github.com/lucascassiano/three-transform-controls#readme"
+}
