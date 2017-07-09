@@ -3,7 +3,7 @@
 ThreeJS TransformControls as an npm module. 
 See example with react-three-renderer.
 
-[[ /docs/moving_plane.gif | height = 400px ]]
+![Alt Text](https://github.com/lucascassiano/three-transform-controls/raw/master/docs/moving_plane.gif )
 
 ## Install
 ```
