@@ -3,6 +3,8 @@
 ThreeJS TransformControls as an npm module. 
 See example with react-three-renderer.
 
+[[ /docs/moving_plane.gif | height = 400px ]]
+
 ## Install
 ```
 npm install three-transform-controls
