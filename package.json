@@ -1,6 +1,6 @@
 {
   "name": "three-transform-controls",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Transform Controls as a NPM package",
   "main": "index.js",
   "scripts": {
